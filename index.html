@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansøgning: EU-arbejdstager</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 2rem; max-width: 800px; margin: auto; background: #f5f5f5; }
+        h1 { color: #333; }
+        .step { display: none; }
+        .step.active { display: block; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .buttons { margin-top: 20px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px 20px; border: none; border-radius: 4px; background: #0073e6; color: white; cursor: pointer; }
+        button:disabled { background: #aaa; }
+    </style>
+</head>
+<body>
+
+<h1>Ansøgning: EU-arbejdstager</h1>
+
+<form id="euForm">
+
+    <div class="step active" id="step1">
+        <h2>1. Personlige oplysninger</h2>
+        <input type="text" placeholder="Fulde navn" required>
+        <input type="text" placeholder="Nationalitet" required>
+        <input type="date" placeholder="Fødselsdato" required>
+        <input type="text" placeholder="Pasnummer" required>
+        <div class="buttons">
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step2">
+        <h2>2. Ansættelse</h2>
+        <input type="text" placeholder="Navn på arbejdsgiver" required>
+        <input type="text" placeholder="CVR-nummer" required>
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step3">
+        <h2>3. Adresse i Danmark</h2>
+        <input type="text" placeholder="Adresse" required>
+        <input type="text" placeholder="Postnummer og by" required>
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step4">
+        <h2>4. Familie</h2>
+        <select required>
+            <option value="">Har du medfølgende familie?</option>
+            <option>Ja</option>
+            <option>Nej</option>
+        </select>
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step5">
+        <h2>5. Fuldmagt</h2>
+        <p>Vedhæft evt. fuldmagt eller upload ved fysisk fremmøde.</p>
+        <input type="file">
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step6">
+        <h2>6. Gennemse</h2>
+        <p>Du kan gennemgå dine oplysninger og rette i de tidligere trin.</p>
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="button" onclick="nextStep()">Næste</button>
+        </div>
+    </div>
+
+    <div class="step" id="step7">
+        <h2>7. Betaling</h2>
+        <p>Pris: 7.500 kr.</p>
+        <p>Moms (25%): 1.875 kr.</p>
+        <p><strong>Samlet pris: 9.375 kr.</strong></p>
+        <div class="buttons">
+            <button type="button" onclick="prevStep()">Tilbage</button>
+            <button type="submit">Gennemfør ansøgning</button>
+        </div>
+    </div>
+
+</form>
+
+<script>
+    let current = 0;
+    const steps = document.querySelectorAll('.step');
+
+    function showStep(index) {
+        steps.forEach((s, i) => s.classList.toggle('active', i === index));
+    }
+
+    function nextStep() {
+        if (current < steps.length - 1) current++;
+        showStep(current);
+    }
+
+    function prevStep() {
+        if (current > 0) current--;
+        showStep(current);
+    }
+
+    document.getElementById("euForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        alert("Ansøgning indsendt!");
+    });
+</script>
+
+</body>
+</html>
